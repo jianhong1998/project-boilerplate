@@ -26,8 +26,8 @@ services:
     ports:
       - '${BACKEND_PORT:-3001}:${BACKEND_PORT:-3001}'
     build:
-      context: ./backend
-      dockerfile: ../docker/local/Dockerfile.backend
+      context: .
+      dockerfile: ./docker/local/Dockerfile.backend
     network_mode: host
     env_file: ./.env
     # depends_on:
@@ -37,17 +37,22 @@ services:
     develop:
       watch:
         - path: ./backend/src
-          target: /apps/backend/src
+          target: /app/backend/src
           action: sync+restart
         - path: ./backend/package.json
           action: rebuild
-        - path: ./backend/package-lock.json
+        - path: ./packages
+          target: /app/packages
+          action: sync+restart
+        - path: ./package.json
+          action: rebuild
+        - path: ./pnpm-lock.yaml
           action: rebuild
 
   db-migration-service:
     build:
-      context: ./backend
-      dockerfile: ../docker/local/Dockerfile.db-migration
+      context: .
+      dockerfile: ./docker/local/Dockerfile.db-migration
     env_file:
       - ./.env
     network_mode: host
@@ -59,15 +64,22 @@ services:
     ports:
       - '${FRONTEND_PORT:-3000}:${FRONTEND_PORT:-3000}'
     build:
-      context: ./frontend
-      dockerfile: ../docker/local/Dockerfile.frontend
+      context: .
+      dockerfile: ./docker/local/Dockerfile.frontend
     network_mode: host
     env_file:
       - ./.env
     develop:
       watch:
         - path: ./frontend/src
-          target: /apps/crud-dapp/src
+          target: /app/frontend/src
           action: sync
         - path: ./frontend/package.json
+          action: rebuild
+        - path: ./packages
+          target: /app/packages
+          action: sync+restart
+        - path: ./package.json
+          action: rebuild
+        - path: ./pnpm-lock.yaml
           action: rebuild

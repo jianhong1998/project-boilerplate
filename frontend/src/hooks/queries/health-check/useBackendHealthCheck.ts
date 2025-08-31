@@ -1,10 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getQueryKey, QueryGroup, QueryType } from '../keys';
 import { apiClient } from '@/lib/api-client';
-
-type Response = {
-  isHealthy: boolean;
-};
+import { IHealthCheckResDTO } from '@claim-submission-app/types';
 
 export const useHealthCheck = () => {
   return useQuery({
@@ -14,7 +11,7 @@ export const useHealthCheck = () => {
       key: '',
     }),
     queryFn: async () => {
-      return await apiClient.get<Response>('/');
+      return await apiClient.get<IHealthCheckResDTO>('/');
     },
   });
 };

@@ -1,0 +1,27 @@
+{
+  "name": "@claim-submission-app/root",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "test:unit": "turbo run test --filter=backend",
+    "test:api": "turbo run test --filter=api-test",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "format": "turbo run format",
+    "clean": "turbo run clean",
+    "up": "docker compose -p claim-submission-app up -w",
+    "up:build": "docker compose -p claim-submission-app up --build -w --remove-orphans",
+    "down": "docker compose -p claim-submission-app down",
+    "db:seed": "turbo run db:seed --filter=backend",
+    "db:reset": "turbo run db:reset --filter=backend"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.6"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

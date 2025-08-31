@@ -1,10 +1,10 @@
 import { AppService } from './app.service';
 
-describe('#getHello', () => {
-  it('should return "Hello World!"', () => {
+describe('#healthCheck', () => {
+  it('should return health check object', () => {
     const appService = new AppService();
     const result = appService.healthCheck();
 
-    expect(result).toBe('Hello World!');
+    expect(result).toEqual({ isHealthy: true });
   });
 });

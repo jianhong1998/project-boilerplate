@@ -1,5 +1,6 @@
 PROJECT_NAME = "claim-submission-app"
 
+# Docker commands (not handled by TurboRepo)
 up/build:
 	@docker compose \
 		-p ${PROJECT_NAME} \
@@ -24,63 +25,47 @@ down/clean:
 clean:
 	@rm -rf ./backend/temp
 	@rm -rf postgres-data
+	@pnpm run clean
 
 clean-image:
 	@docker image prune -f
 
+# TurboRepo delegated commands
+build:
+	@pnpm run build
+
+dev:
+	@pnpm run dev
+
 format:
-	@cd backend && \
-		pnpm run format
-	@cd api-test && \
-		pnpm run format
-	@cd frontend && \
-		pnpm run format
+	@pnpm run format
 
 lint:
-	@echo "Checking lint issue in backend..." && \
-		cd backend && \
-		pnpm run lint .
-	@echo "Checking lint issue in api-test..." && \
-		cd api-test && \
-		pnpm run lint .
-	@echo "Checking lint issue in frontend..." && \
-		cd frontend && \
-		pnpm run lint .
+	@pnpm run lint
 
 lint/fix:
-	@echo "Checking lint issue in backend..." && \
-		cd backend && \
-		pnpm run lint . --fix
-	@echo "Checking lint issue in api-test..." && \
-		cd api-test && \
-		pnpm run lint . --fix
-	@echo "Checking lint issue in frontend..." && \
-		cd frontend && \
-		pnpm run lint . --fix
+	@pnpm run lint:fix
 
 install:
-	@chmod +x ./scripts/reinstall.sh && \
-		./scripts/reinstall.sh
+	@pnpm install
+
+test:
+	@pnpm run test
 
 test/unit:
-	@cd backend && \
-		pnpm run test
+	@pnpm run test:unit
 
 test/api:
-	@cd api-test && \
-		pnpm run test
+	@pnpm run test:api
 
+# Database commands using TurboRepo
 db/data/up:
-	@cd backend && \
-		npm run build && \
-		npm run seed:run
+	@pnpm run db:seed
 
 db/data/down:
 	@cd backend && \
-		npm run build && \
+		pnpm run build && \
 		DOTENV_CONFIG_PATH=../.env npx node -r dotenv/config ./dist/config/db-scripts/data-down.js
 
 db/data/reset:
-	@$(MAKE) db/data/down
-	@cd backend && \
-		npm run seed:run
+	@pnpm run db:reset
