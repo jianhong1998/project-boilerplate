@@ -22,7 +22,8 @@ down/clean:
 		$(MAKE) clean-image
 
 clean:
-	@rm -rf ./temp
+	@rm -rf ./backend/temp
+	@rm -rf postgres-data
 
 clean-image:
 	@docker image prune -f

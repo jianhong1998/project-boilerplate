@@ -7,13 +7,17 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: ${DATABASE_USER:-postgres}
-      POSTGRES_DB: ${DATABASE_DB:-invoice_management_app_db}
+      POSTGRES_DB: ${DATABASE_DB:-project_db}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-Password1234}
     env_file:
       - path: ./.env
         required: true
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres -d invoice_management_app_db']
+      test:
+        [
+          'CMD-SHELL',
+          'pg_isready -U ${DATABASE_USER:-postgres} -d ${DATABASE_DB:-project_db}',
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
