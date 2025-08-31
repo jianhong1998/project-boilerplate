@@ -25,10 +25,12 @@ down/clean:
 clean:
 	@rm -rf ./backend/temp
 	@rm -rf postgres-data
-	@pnpm run clean
 
 clean-image:
 	@docker image prune -f
+
+clean/dist:
+	@rm -rf **/dist
 
 # TurboRepo delegated commands
 build:
@@ -60,12 +62,18 @@ test/api:
 
 # Database commands using TurboRepo
 db/data/up:
-	@pnpm run db:seed
+# 	@pnpm run db:seed
+	@cd backend && \
+		pnpm run build && \
+		pnpm run seed:run
 
 db/data/down:
 	@cd backend && \
 		pnpm run build && \
-		DOTENV_CONFIG_PATH=../.env npx node -r dotenv/config ./dist/config/db-scripts/data-down.js
+		DOTENV_CONFIG_PATH=../.env pnpx node -r dotenv/config ./dist/backend/config/db-scripts/data-down.js
 
 db/data/reset:
-	@pnpm run db:reset
+	@cd backend && \
+		pnpm run build && \
+		DOTENV_CONFIG_PATH=../.env pnpx node -r dotenv/config ./dist/backend/config/db-scripts/data-down.js && \
+		pnpm run seed:run

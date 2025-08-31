@@ -43,7 +43,7 @@ FROM deps AS shared-build
 COPY packages/ ./packages/
 
 # Build only shared packages (cached unless shared packages change)
-RUN pnpm run build --filter=@claim-submission-app/types
+RUN pnpm run build --filter=@project/types
 
 # =======================================================
 # Development Stage - Final development image

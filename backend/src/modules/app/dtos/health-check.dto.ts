@@ -1,4 +1,4 @@
-import { IHealthCheckResDTO } from '@claim-submission-app/types';
+import { IHealthCheckResDTO } from '@project/types';
 
 export class HealthCheckResDTO implements IHealthCheckResDTO {
   public isHealthy: boolean;

@@ -8,6 +8,7 @@ export class AppController {
 
   @Get()
   getHello() {
+    console.log('hello');
     const result = this.appService.healthCheck();
     return new HealthCheckResDTO(result);
   }

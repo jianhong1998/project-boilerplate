@@ -23,7 +23,7 @@
     "noFallthroughCasesInSwitch": false,
     "types": ["vitest/globals"],
     "paths": {
-      "@claim-submission-app/types": ["../packages/types/src"]
+      "@project/types": ["../packages/types/src"]
     }
   }
 }

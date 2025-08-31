@@ -12,11 +12,6 @@ RUN npm install -g pnpm@latest
 
 WORKDIR /app
 
-# =======================================================
-# Dependencies Stage - Install dependencies
-# =======================================================
-FROM base AS deps
-
 # Copy workspace configuration files (changes infrequently)
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY turbo.json ./
@@ -29,30 +24,22 @@ COPY backend/package.json ./backend/
 # This layer will be cached unless dependencies change
 RUN pnpm install --frozen-lockfile
 
-# =======================================================
-# Build Stage - Build shared packages
-# =======================================================
-FROM deps AS shared-build
-
-# Copy only shared package source code
-COPY packages/ ./packages/
-
-# Build only shared packages (cached unless shared packages change)
-RUN pnpm run build --filter=@claim-submission-app/types
 
 # =======================================================
 # Development Stage - Final development image
 # =======================================================
-FROM shared-build AS development
-
+FROM base
+WORKDIR /app
 # Copy backend source code (this layer changes most frequently)
 COPY backend/ ./backend/
+COPY packages/types/ ./packages/types/
 
 # Build backend (will use cached shared packages)
-RUN pnpm run build --filter=backend
+# RUN pnpm run build --filter=backend
 
 # Set working directory to backend for runtime
 WORKDIR /app/backend
 
 # For development, use the start command (production ready)
-CMD ["pnpm", "run", "start"]
+CMD ["pnpm", "run", "dev"]
+# CMD ["sh", "-c", "ls .. && pnpm run dev"]

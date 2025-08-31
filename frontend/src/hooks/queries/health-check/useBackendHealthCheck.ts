@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { getQueryKey, QueryGroup, QueryType } from '../keys';
 import { apiClient } from '@/lib/api-client';
-import { IHealthCheckResDTO } from '@claim-submission-app/types';
+import { IHealthCheckResDTO } from '@project/types';
 
 export const useHealthCheck = () => {
-  return useQuery({
+  return useQuery<IHealthCheckResDTO>({
     queryKey: getQueryKey({
       group: QueryGroup.HEALTH_CHECK,
       type: QueryType.ONE,

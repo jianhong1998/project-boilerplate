@@ -9,7 +9,7 @@
     "format": "prettier . --write"
   },
   "dependencies": {
-    "@claim-submission-app/types": "workspace:*",
+    "@project/types": "workspace:*",
     "axios": "^1.11.0"
   },
   "devDependencies": {
