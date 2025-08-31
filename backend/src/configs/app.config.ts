@@ -2,7 +2,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 
-import DatabaseConfig from './db/database.config';
+import DatabaseConfig from '../db/database.config';
 
 export class AppConfig {
   private constructor() {}
