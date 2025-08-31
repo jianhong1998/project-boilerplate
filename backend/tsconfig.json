@@ -23,7 +23,8 @@
     "noFallthroughCasesInSwitch": false,
     "types": ["vitest/globals"],
     "paths": {
-      "@project/types": ["../packages/types/src"]
+      "@project/types": ["../packages/types/src"],
+      "src": ["./src"]
     }
   }
 }

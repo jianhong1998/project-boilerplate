@@ -38,10 +38,10 @@ services:
       watch:
         - path: ./backend/src
           target: /app/backend/src
-          action: sync+restart
+          action: sync
         - path: ./packages
           target: /app/packages
-          action: sync+restart
+          action: sync
 
   db-migration-service:
     build:

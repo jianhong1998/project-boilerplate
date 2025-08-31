@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { toast } from 'sonner';
 
 export const HomePage: NextPage = () => {
-  const { error: healthCheckError } = useHealthCheck();
+  const { error: healthCheckError, data: healthCheckResult } = useHealthCheck();
 
   useEffect(() => {
     if (!healthCheckError) return;
@@ -17,6 +17,8 @@ export const HomePage: NextPage = () => {
   }, [healthCheckError]);
 
   return (
-    <div className="text-3xl font-extrabold text-blue-600">Hello World</div>
+    <div className="text-3xl font-extrabold text-blue-600">
+      Backend Server is {healthCheckResult?.isHealthy ? `Healthy` : `Unhealthy`}
+    </div>
   );
 };
