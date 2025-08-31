@@ -93,24 +93,8 @@ make install
 
 ### 2. Environment Configuration
 
-Edit the `.env` file with your preferred settings:
-
-```bash
-# Database Configuration
-DATABASE_HOST=localhost
-DATABASE_PORT=5432
-DATABASE_USER=postgres
-DATABASE_PASSWORD=Password1234
-DATABASE_DB=project_db
-
-# Application Ports
-FRONTEND_PORT=3000
-BACKEND_PORT=3001
-
-# Backend Configuration
-BACKEND_CLIENT_HOST=http://localhost:3000
-FRONTEND_BACKEND_BASE_URL=http://localhost:3001
-```
+Edit the `.env` file with your preferred settings.
+Refer to `.env.template` for the required environment variables.
 
 ### 3. Start the Application
 
@@ -351,6 +335,5 @@ cd backend && pnpm run migration:run
 
 ### Getting Help
 
-- Check the [CLAUDE.md](./CLAUDE.md) for development guidelines
 - Review Docker logs: `docker-compose logs [service-name]`
 - Check individual service logs in their respective directories

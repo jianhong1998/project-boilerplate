@@ -2,13 +2,10 @@
 node_modules
 dist
 temp
+.turbo
 
 # Sensitive data
 # .env
 
 
 .gitignore
-.prettierignore
-.prettierrc
-eslint.config.mjs
-vitest.config.ts

@@ -21,6 +21,10 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "paths": {
+      "@project/types": ["../packages/types/src"],
+      "src": ["./src"]
+    }
   }
 }

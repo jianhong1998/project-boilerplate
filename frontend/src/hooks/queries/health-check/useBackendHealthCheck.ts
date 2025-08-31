@@ -1,20 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { getQueryKey, QueryGroup, QueryType } from '../keys';
 import { apiClient } from '@/lib/api-client';
-
-type Response = {
-  isHealthy: boolean;
-};
+import { IHealthCheckResDTO } from '@project/types';
 
 export const useHealthCheck = () => {
-  return useQuery({
+  return useQuery<IHealthCheckResDTO>({
     queryKey: getQueryKey({
       group: QueryGroup.HEALTH_CHECK,
       type: QueryType.ONE,
       key: '',
     }),
     queryFn: async () => {
-      return await apiClient.get<Response>('/');
+      return await apiClient.get<IHealthCheckResDTO>('/');
     },
   });
 };
