@@ -1,0 +1,21 @@
+# Common generated folders
+**/node_modules
+**/dist
+**/.next
+
+# OS
+**/DS_Store
+
+# Container Volumes
+postgres-data
+
+# Sensitive files
+.env*
+!.env.template
+
+# Local files
+*.local.*
+
+# Temp folders
+**/temp
+**/tmp

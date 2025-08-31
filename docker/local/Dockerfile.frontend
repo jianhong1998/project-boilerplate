@@ -1,0 +1,15 @@
+FROM node:22.14.0-slim
+
+RUN apt update \
+    && apt install --assume-yes --no-install-recommends \
+        build-essential \
+        python3
+RUN npm i -g pnpm@latest
+
+WORKDIR /apps/crud-dapp
+
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
+COPY . .
+CMD [ "pnpm", "run", "dev" ]
