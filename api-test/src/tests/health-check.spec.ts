@@ -1,4 +1,5 @@
-import axiosInstance from './config/axios';
+import axiosInstance from '../config/axios';
+import { IHealthCheckResDTO } from '@project/types';
 
 describe('Health Check', () => {
   it('should return status 200', async () => {
@@ -6,6 +7,10 @@ describe('Health Check', () => {
       const result = await axiosInstance.get('/');
 
       expect(result.status).toBe(200);
+      expect(result.data).toMatchObject({
+        isHealthy: true,
+        timestamp: expect.any(String) as string,
+      } as IHealthCheckResDTO);
     } catch (error) {
       expect(error).toBeUndefined();
     }

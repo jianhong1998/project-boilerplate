@@ -36,9 +36,6 @@ clean/dist:
 build:
 	@pnpm run build
 
-dev:
-	@pnpm run dev
-
 format:
 	@pnpm run format
 
@@ -49,20 +46,21 @@ lint/fix:
 	@pnpm run lint:fix
 
 install:
-	@pnpm install
+# 	@pnpm install
+	@chmod +x ./scripts/reinstall.sh && \
+		./scripts/reinstall.sh
 
-test:
-	@pnpm run test
 
 test/unit:
-	@pnpm run test:unit
+	@cd backend && \
+		pnpm run test
 
 test/api:
-	@pnpm run test:api
+	@cd api-test && \
+		pnpm run test
 
 # Database commands using TurboRepo
 db/data/up:
-# 	@pnpm run db:seed
 	@cd backend && \
 		pnpm run build && \
 		pnpm run seed:run
